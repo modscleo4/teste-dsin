@@ -133,12 +133,13 @@ export default {
     };
   },
   async beforeCreate() {
+    console.log(this.schedule);
     this.services = await Services.index();
     this.users = await Users.index({ role: "client" });
   },
   methods: {
     formatDate: (date) => {
-      return `${date.getFullYear()}-${("" + date.getMonth()).padStart(
+      return `${date.getFullYear()}-${("" + (date.getMonth() + 1)).padStart(
         2,
         "0"
       )}-${("" + date.getDate()).padStart(2, "0")}T${(

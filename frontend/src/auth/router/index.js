@@ -13,12 +13,9 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const publicRoutes = ['/login', '/register']
-  const requireAuth = !publicRoutes.includes(to.path)
-  const token = JSON.parse(localStorage.getItem('token'))
-
-  if (requireAuth && !token) {
-    return next('/login')
+  const user = JSON.parse(localStorage.getItem('user'))
+  if (user) {
+    location.href = `${user.roles[0].slug}/home`
   }
 
   next()

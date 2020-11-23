@@ -82,7 +82,7 @@ class ScheduleController {
   async update({ params, request, response, auth }) {
     const schedule = await auth.user.schedules().where('id', '=', params.id).firstOrFail()
     // Solicitado: cliente alterar o agendamento pelo sistema até 2 dias antes do agendado
-    if (new Date() < new Date(schedule.date) && daysDiff(schedule.date, new Date()) < 2) {
+    if (daysDiff(new Date(), schedule.date) < 2) {
       throw new HttpException('Unauthorized', 403)
     }
 
@@ -118,7 +118,7 @@ class ScheduleController {
   async destroy({ params, request, response, auth }) {
     const schedule = await auth.user.schedules().where('id', '=', params.id).firstOrFail()
     // Solicitado: cliente alterar o agendamento pelo sistema até 2 dias antes do agendado
-    if (new Date() < new Date(schedule.date) && daysDiff(schedule.date, new Date()) < 2) {
+    if (daysDiff(new Date(), schedule.date) < 2) {
       throw new HttpException('Unauthorized', 403)
     }
 

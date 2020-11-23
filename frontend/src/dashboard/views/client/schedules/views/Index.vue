@@ -66,10 +66,8 @@
           >
 
           <div
-            v-if="
-              new Date() < new Date(schedule.date) &&
-              daysDiff(new Date(schedule.date), new Date()) < 2
-            "
+            style="display: inline-block"
+            v-if="daysDiff(new Date(), new Date(schedule.date)) >= 2"
           >
             <router-link
               class="btn btn-sm btn-outline-primary mr-1"
